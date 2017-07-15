@@ -19,7 +19,6 @@ class MyDaemon():
 
     def __init__(self, pidfile='/tmp/hullht.pid'):
         self.pidfile = pidfile
-        os.environ.putenv('VIM_PID_F', self.pidfile)
 
     def daemonize(self):
         """Deamonize class. UNIX double fork mechanism."""
@@ -165,8 +164,9 @@ class MyDaemon():
         while True:  # since the  daemon needs to keep running
             pass  # we need to keep the while loop and do nothing.
 
+
 if __name__ == "__main__":
-    daemon = MyDaemon('/tmp/hullht.pid')
+    daemon = MyDaemon('/tmp/vimvim.pid')
     if len(sys.argv) == 2:
         if 'start' == sys.argv[1]:
             daemon.start()

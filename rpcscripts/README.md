@@ -8,4 +8,6 @@ it includes
 
 'rpcbuildenv.py': VimRpc API function Instance
 
+'writevimpid.py': Writes Vim pid the daemon's pidfile
+
 '__init__.py': Well Python __init__ file
