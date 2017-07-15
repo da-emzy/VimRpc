@@ -1,11 +1,12 @@
 # VimRpc #
 
-*The project needs contributors*
 
 |
 | Src:  https://github.com/da-emzy/VimRpc
 | Docs: https://github.com/da-emzy/VimRpc/doc/VimRpc.txt
 |
+
+*The project needs contributors*
 
 VimRpc is a vim plugin that brings scripting to vim.
 VimRpc allows you to  run vim as a REMOTE PROCEDURE CALL daemon,
@@ -36,7 +37,7 @@ Documentation
 Requirements
 ============
 
-- VIM >= 7.4 with `+python` or `+python3` support)
+- VIM >= 7.4 with `+python` or `+python3` support
 
 How to install
 ==============
