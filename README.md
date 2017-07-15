@@ -67,7 +67,7 @@ Using Vundle (also recommended)
 add the following to your `vimrc` then run
   `:PluginInstall`
 
-        Plugin 'da-emzy/VimRpcd'
+        Plugin 'da-emzy/VimRpc'
 
 Manually
 --------
@@ -105,7 +105,7 @@ at https://github.com/da-emzy/VimRpc/issues
 
 Contributing
 ============
-
+Author
 * Da Emzy (emzyoflyf@yahoo.com)
 
 Also see the `AUTHORS` file.
