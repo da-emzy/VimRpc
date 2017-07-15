@@ -1,0 +1,378 @@
+*VimRpc.txt*
+
+*VimRpc*	For `Vim version 7.5`	Last change: Mon Jun 26 19:43:16 UTC 2017
+
+
+|VimRpc|                                |API| 
+1. Description                        |VimRpc-description|
+2. Protocols                          |VimRpc-protocols|
+    2.1 Json                          |VimRpc-Json|
+    2.2 Xml                           |VimRpc-Xml|
+3. Usage                              |VimRpc-usage|
+   3.1 START-STOP                     |VimRpc-start-stop|
+   3.2 CONNECTING                     |VimRpc-connecting|
+4. Interface and Settings             |VimRpc-interface| 
+5. API FUNCTIONS                      |VimRpc-API-Functions|
+7. Differences between Json/Xml       |Json-Xml-differences| 
+8. Settings                           |VimRpc-Settings|
+9. License                            |VimRpc-license|
+
+For Vim version 7.0 or later.
+This plugin only works if vim is compiled with '+python' Feature.
+{Vi does not have any of these features.}
+
+This project needs 'contributors'!!! See |VimRpc-Development| on how to 'Contribute'.~
+
+==============================================================================
+DESCRIPTION                                             *VimRpc-description*
+VimRpc is a vim plugin that allows you to embed vim in your program thereby giving you access 
+to all of 'vim' functions and commands.
+with VimRpc you can edit files in vim, run 'diff' commands open multiple windows
+and do more with the programming language of your choice without launching vim.
+
+VimRpc does this by making vim run as a "REMOTE PROCEDURE CALL" daemon where you run your
+Commands as the client 'vim' handles it (being the server).
+VimRpc also commes with HIGH-LEVEL API-FUNCTIONS to make VimRpc much more simpler and 
+easy to use the User
+
+==============================================================================
+PROTOCOLS                               *VimRpc-protocols*
+
+VimRpc currently supports 2 RPC PROTOCOL Json |VimRpc-json| and Xml |VimRp-Xml|
+Although they perform the task well still they vary in implementation thus its left for the user to choose which protocol to use the default protocol being used by |VimRpc| is Json
+
+see |Json-Xml-differences| for see the differences between the two protocols.
+
+#########################
+Json                *VimRpc-Json*
+
+Json(Javascript Object Notation) compared to Xml is faster and also supports a lot of programming
+languages.
+its socket implementation is written via the low level socket module any client can be written
+in any language that supports 'JSON' to access the VimRpc 'JSON' server written in python3.
+Compared to 'XML', 'JSON' client must connect via the socket package/module of the language
+A lot can be found about 'JSON' on their homepage here:
+http://json.org/~
+
+NOTE: USING JSON YOU NEED TO AUTHENTICATE WITH THE SERVER WITH THIS HANDSHAKE:~
+
+'23JKKJNFGJKFGDKDFKFK'~
+
+
+###################################
+Xml                             *VimRpc-Xml*
+
+Xml supports a almost all languages even C/C++
+To write a client for the |VimRpc-Xml| server the client must use an already created package
+written in the Language for Xml.
+Ex. for Perl to write a |VimRpc-Xml| client Use the Frontier::Client package.
+A lot about 'Xml' can be found here:
+http://xmlrpc.com/~
+
+==============================================================================
+
+USAGE                               |VimRpc-usage|
+
+
+You can start/stop VimRpc in Two ways.
+
+#################################################################
+
+START-STOP                          *VimRpc-start-stop*
+
+==FIRST METHOD==~
+
+Thus First method starts vim as a daemon. 
+Server stays alive until Shutdown of the machine and is the 'preferred' method of Using VimRpc.
+In your `vimruntime` (where  you installed VimRpc) there should be a file named "vimserver.py"
+in the directory 'server'.
+NOTE: you can move it to any part of your choice.
+Run the script with:
+To Start: >
+            python3 vimserver.py start
+To Stop: >
+            python3 vimserver.py stop
+To Restart: >
+                python3 vimserver.py restart
+
+### JUST LIKE A NORMAL UNIX DAEMON~
+
+==SECOND METHOD=====~
+In the second method the server is only running while running vim.
+Once you quit 'vim' the server dies.
+This is most usefull for Platforms cannot fork a daemon for users that don't have permission to fork a daemon 
+Launch Vim and type the following commands.
+To Start: ..... :`StartRpc` ......
+
+To Stop: ..... :`StopRpc` .......
+
+#################################################################
+
+CONNECTING                  *VimRpc-connecting*
+
+To connect to the REMOTE PROCEDURE CALL daemon which in your runtimepath in 'modules'
+you would find directories of what ever programming language is supported.
+To be able to use the RPC client copy the files to your language 'module/package search path'
+or add the path to your module search path.
+Example with python: >
+                        import sys
+                        sys.path = 'runtimepath' + sys.path
+
+where 'runtimepath' is the directory where the modules/package for your language are stored.~
+
+The file names in the 'modules' directory should be in the format 'vimxmlclient'|'vimjsonclient'.
+While the suffix would be your language suffix for modules/packagees.
+Ex:
+for python >
+            vimxmlclient.py
+for perl >
+            vimjsonclient.pm
+e.t.c~
+
+In whichever language or protocol you are using there should be a Class object named
+|VimRpc| the class object accepts the  arguments *address* and *port* .
+
+If address and port is None VimRpc checks your enviromental variable for variable 
+VIM_HOST for |address| and VIM_PORT for |port|.
+
+Example in python to after running the |VimRpc-Json| daemon to connect to it one would do.
+In Python: >
+        import vimjsonclient
+        vim=vimjsonclient.VimRpc("127.0.0.1",port=1700)
+        #no you can send commands to vim using the rpc object(vim) returned by VimRpc
+
+To connect to xml daemon is pratically the same except you would hav to import vimxmlclient instead of vimjsonclient
+and then you can call commands to the vim server with the Object returned by VimRpc.
+
+And that is that!.~
+
+
+==============================================================================
+
+API-FUNCTIONS                   *VimRpc-API-Functions*
+
+VimRpc is comes with 20+ API functions to make things easier for you and save you from wrecking down
+things while using |VimRpc|.
+The functions are mentioned here with the arguments they accept and what they do and return.~
+NOTE: NEVER PASS ARGUMENTS AS KEYWORD ARGUMENTS TO THE FUNCTIONS BECAUSE THE WONT BE EVALUATED~
+
+ex never do >
+            match(string='hello', start=0)
+IT IS WRONG AND WONT WORK ~
+
+instead do >
+        match('hello',0)
+"THIS WOULD WORK"~
+
+..............................................~
+All the functions here returns a dictionary with key 'Result', 'Error' and 'Id'~
+execpt vimjsonclient.py implementation which returns a named tuple thus keys
+can be accessed with a precedding '.' 
+Ex >
+    python3
+        import vimjsonclient
+        vim=vimjsonclient.VimRpc("127.0.0.1",port=1700)
+        value = vim.curWinData()
+        result = value.Result
+
+Result: is the Return Value of the Function or None when there is an Error~
+Error: is error that occurred while running your request or None when there is no error~
+Id: is current calling Id.~
+
+NOTE: Result is Never None when there is no Error. i.e Result is only None when~
+there is  an Error ~
+
+##############################################################~
+
+`curWin()`    #accepts no arguments
+            #returns the current window object.
+
+`curWinData()`    #accepts no argument 
+                #returns a list of the data in the current window
+
+`winData(*win*)`    #accepts a window object returned by curWin() 
+                  #returns the data in window |win|
+
+`writeWindow(win)`    #accepts a window orbject or None to use the current window you are in.
+                    #returns 0
+`substitute(patttern, string, range)`    #just like vim's substitute function accepts patttern~, 
+                                        to be searched for, string~ to be substituted for and 
+                                        Range which is one of vims flag for the substitute 
+                                        function (defaults to 'g')
+
+`match(string, start)`    #accepts a string patttern to be matched for and 
+                        start which marks begining of the matching
+                        An implementation of vim's match function returns the first match
+
+`search(patttern, flag)`  #accepts a regex patttern to be searched for and
+                        one of vims flag characters which defaults to 'c' if flag is None
+                        #returns a list of strings in the current buffered that was matched 
+                        by the regex patttern
+
+`insert(line, data)`  #accepts line to be inserted and 
+                    data a string to be inserted @ line
+                    #inserts a sting into the current window-buffer
+
+`append(data)`    #accepts data a string to be inserted at the end of the current window-buffer
+                #returns 0
+`prevWin()`   #accepts no argument
+            #moves to the previous window
+
+`nextWin()`   #accepts no argument
+            #moves to the next window
+
+`moveToWin(*win*)`  #accepts a window object returned by |curWin| or other functions
+                #moves to window |win|
+
+`normalCommand(comm)`   #accepts string comm
+                        #executes normal command comm, returns 0
+
+`wCloseWin(win)`   #accepts a window object returned by |curWin| or other functions
+                #writes the window and closes the window win like `wq`
+
+`fCloseWin(win)`    #accepts a window object returned by |curWin| or other functions
+                    #force closes window win without saving like `:q!`
+
+`closeCurwin(force)` #accepts a boolean options True or False
+                    #if force is `True` force closes the current window
+                    #else if force is False writes and closes the current window
+
+`wCloseAll()`   #accepts no argument
+                #writes and close's all windows
+
+`fCloseAll()`     #accepts no arguments
+                #force close's all windows
+
+`getWindowName(win)`    #accepts a window object returned by |curWin| or other functions        
+                        #returns the window name of win
+
+`getAllWindowNames()`    #accepts no arguments
+                         #returns a list of all window names
+
+`openFile()`  #accepts a filename to be opened
+              #returns the window object of the file opened
+              #NOTE: THE CURRENT WINDOW IS NOW THE NEW FILES WINDOW
+
+`getWindows()`    #access no argument
+                  #returns a list of all the window object
+
+`getLine(line, win)`  #accepts line and a window object 
+                     #returns 'line' line in window win
+
+`eval(expr)`  #accept an expr to be evaluated
+              #returns the expr being evaluated by vim
+
+`exCommand(command)` #accepts a command to be run by vim
+                      #runs the command as an external command and returns 0
+
+`vimFunction(func,())`    #accepts a string function and list ()
+                         where func is a vim function and () is a list of the argument 
+                         the function accepts
+                         #evaluates the function and returns its result
+
+
+==============================================================================
+
+Differences-between-Json/Xml       *Json-Xml-differences* 
+
+By default |VimRpc| uses Json for the rpc call see |VimRpc-Settings| on how to change the 
+PROTOCOL~ being used.
+A lot of help can be found on 'Google' on the differences between the two 'PROTOCOLS'.
+But the main differences from the 'Authors' knowledge is that compared to 'Json' 'Xml' is slow.
+this page should get you started on finding the differences between the two.
+address:> 
+http://odoo.com/forum/help-1/question/xml-rpc-or-json-rpc-whichever-is-the-best-46582~
+
+
+==============================================================================
+SETTINGS            *VimRpc-Settings*
+
+PORT~
+By default VimRpc runs on port (1700) a non privileged port 
+if you have firewall enabled, make sure the port is OPEN else VimRpc cannot run.
+You can also change the port to listen by adding this to your vimrc file
+:vimrc: >
+        let g:rpc_bind_port="PORT OF YOUR CHOICE"
+
+PROTOCOL~
+You can change the 'protocol' being used by adding this line to your vimrc file.
+:vimrc: >
+    let g:rpc_protocol="xml"  " or whichever protocol you which to user
+
+BIND-ADDRESS~
+By default |VimRpc| binds to all address of the host(both 'Foreign and Local Address')
+Options are 
+'local' for local address only and
+'foreign' for all available address
+To change add this to your vimrc file
+>
+    let g:rpc_bind_address='local' "for local address only 
+    or 'foreign' for all available address
+
+CONNECTIONS~
+By default vim forks the VimRpc server to handle 3 connections at a time.
+To change for any reason to handle more or less,
+Add this to your vimrc file
+>
+   let g:rpc_client_conn="NUMBER OF YOUR CHOICE"
+>
+==============================================================================
+FAQ                 *VimRpc-Faq*
+
+Development of VimRpc happens here 'http://github.com/da-emzy/VimRpc/'
+You can raise an issue if you find VimRpc behaving `abnormal` .
+After starting VimRpc as a daemon if your shell misbehaves this is caused by VimRpc
+and can be fixed with the following command on a unix shell.
+>
+    tput init
+    tput clear
+Or for bash shell a 
+<C-L>
+should fix.....
+
+this should be fixed in future updates.~
+
+==============================================================================
+DEVELOPMENT         *VimRpc-Development*
+
+`Contribute` in writing a `VimRpc` `client` in any Language you know.
+
+Since both 'JSON' and 'XML' are understood by many languages writing a VimRpc client ~
+in any language not yet supported is Welcomed.~
+
+TO CONTRIBUTE:~
+
+Make a clone of branch "DEVELOP" after making changes make sure you add your self to the AUTHORS list ~
+Any other 'Contributions' and 'Bug-Fixes' are also Welcomed.~
+
+###############################
+AUTHOR ~
+VimRpc was Written by 'da-emzy': 'http://github.com/da-emzy/VimRpc'~
+
+See the Authors File for other Contributors~
+
+
+==============================================================================
+
+LICENSE                     *VimRpc-License*
+
+VimRpc is Licensed under 'GPLv3'~
+
+Copyright (C) <2017>  <da-emzy>~
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Copyright (C) <2017>  <da-emzy>~
+
+vim:tw=78:ts=8:ft=help:norl:
