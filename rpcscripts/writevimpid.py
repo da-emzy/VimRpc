@@ -5,7 +5,7 @@ import os
 
 
 def writepid(self):
-    """docstring for writepid"""
+    """write's vim pid to vim's daemon pidfile"""
     curr_pid = os.getpid()
     fhandle = open('/tmp/vimvim.pid', 'a')
     fhandle.write('%s \n' % curr_pid)
