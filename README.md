@@ -1,10 +1,9 @@
 # VimRpc #
 
 
-|
 | Src:  https://github.com/da-emzy/VimRpc
+
 | Docs: https://github.com/da-emzy/VimRpc/doc/VimRpc.txt
-|
 
 *The project needs contributors*
 
