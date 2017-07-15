@@ -24,7 +24,9 @@ easy to use the User
 
 ******************
 VimRpc comes bundled with 20+ API functions that give you HIGH-LEVEL access to the vim daemon.
-Run ':help VimRpc-API-Functions' to get details of the API-Functions and what they accept
+Run:
+``:help VimRpc-API-Functions`` 
+To get details of the API-Functions and what they accept/return.
 
 
 Documentation
