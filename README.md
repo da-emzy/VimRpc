@@ -117,16 +117,15 @@ Also see the `AUTHORS` file.
 Development of VimRpc happens at github:
 https://github.com/klen/python-mode
 
-Please make a pull request to `development` branch and add yourself to
-`AUTHORS`.
+Please make a pull request to `dev` branch and add yourself to the `AUTHORS` file.
 
 Copyright
 =========
 
-Copyright © 207 Da Emzy (da-emzy)
+Copyright © 217 Da Emzy (da-emzy)
 
 License
 =======
 
-Licensed under a `GNU lesser general public license`_.
+Licensed under a `GNU lesser general public license`
 
