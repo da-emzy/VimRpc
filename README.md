@@ -36,7 +36,7 @@ Documentation
 Requirements
 ============
 
-- VIM >= 7.5 with `+python` or `+python3` support)
+- VIM >= 7.4 with `+python` or `+python3` support)
 
 How to install
 ==============

@@ -1,6 +1,6 @@
 *VimRpc.txt*
 
-*VimRpc*	For `Vim version 7.5`	Last change: Mon Jun 26 19:43:16 UTC 2017
+*VimRpc*	For `Vim version 7.4`	Last change: Mon Jun 26 19:43:16 UTC 2017
 
 
 |VimRpc|                                |API| 
