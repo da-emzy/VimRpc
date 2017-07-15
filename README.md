@@ -1,6 +1,7 @@
 # VimRpc #
 
 
+
 | Src:  https://github.com/da-emzy/VimRpc
 
 | Docs: https://github.com/da-emzy/VimRpc/doc/VimRpc.txt
@@ -11,8 +12,8 @@ VimRpc is a vim plugin that brings scripting to vim.
 VimRpc allows you to  run vim as a REMOTE PROCEDURE CALL daemon,
 Thereby connecting to it as a client and running the API FUNCTIONS bundled with VimRpc.
 
-VimRpc allows you to embed vim in your program thereby giving you access 
-to all of 'vim' functions and commands.
+VimRpc allows you to embed vim in your program, 
+giving you access to all of 'vim' functions and commands.
 With VimRpc you can edit files in vim, run 'diff' commands open multiple windows
 and do more with the programming language of your choice without launching vim.
 
@@ -31,7 +32,8 @@ Documentation
 
 .. contents::
 
-**To read VimRpc documentation in Vim, see** ``:help VimRpc.txt``
+**To read VimRpc documentation in Vim, see** 
+``help VimRpc.txt``
 
 Requirements
 ============
