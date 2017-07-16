@@ -79,7 +79,7 @@ class VIMRPCENV(object):
 
     def __init__(self,):
         # INIT class Variables
-        self.restr = os.path.expanduser('~/.vim/vimpid.fake')
+        self.restr = os.path.expanduser('~/.vim/fakepid.VimRpc')
         # self.restr the empty file vim opens when running as
         # a "daemon" should not be edited
         self.classes = ['VIMRPCENV']

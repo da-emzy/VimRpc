@@ -122,7 +122,7 @@ Please make a pull request to `dev` branch and add yourself to the `AUTHORS` fil
 Copyright
 =========
 
-Copyright @ 2017 Da Emzy (da-emzy)
+Copyright ©2017 Onoja Emmanuel  (`Da emzy`)
 
 License
 =======

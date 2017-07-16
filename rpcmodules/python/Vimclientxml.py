@@ -26,8 +26,3 @@ def VimRpc(address=None):
     _serv_add = 'http://%s:%s' % (address)
     lorris = ServerProxy(_serv_add, allow_none=True)
     return lorris
-
-if __name__ == '__main__':
-    pa = VimRpc(("127.0.0.1", "1700"))
-    a = pa.curWinData()
-    print(a)
