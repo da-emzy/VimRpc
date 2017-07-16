@@ -373,6 +373,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Copyright (C) <2017>  <da-emzy>~
+Copyright (C) <2017> <Onoja Emmanuel (da-emzy)>~
 
 vim:tw=78:ts=8:ft=help:norl:
