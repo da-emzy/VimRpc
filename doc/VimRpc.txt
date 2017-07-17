@@ -88,11 +88,11 @@ In your `vimruntime` (where  you installed VimRpc) there should be a file in the
 NOTE: you can move it to any part of your choice.
 Run the script with:
 To Start: >
-            python3 vimserver.py start
+            python3 vimdaemon.py start
 To Stop: >
-            python3 vimserver.py stop
+            python3 vimdaemon.py stop
 To Restart: >
-                python3 vimserver.py restart
+                python3 vimdaemon.py restart
 
 ### JUST LIKE A NORMAL UNIX DAEMON~
 
