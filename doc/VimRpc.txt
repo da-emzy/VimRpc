@@ -84,8 +84,7 @@ START-STOP                          *VimRpc-start-stop*
 
 Thus First method starts vim as a daemon. 
 Server stays alive until Shutdown of the machine and is the 'preferred' method of Using VimRpc.
-In your `vimruntime` (where  you installed VimRpc) there should be a file named "vimserver.py"
-in the directory 'server'.
+In your `vimruntime` (where  you installed VimRpc) there should be a file in the directory server named "vimdaemon.py".
 NOTE: you can move it to any part of your choice.
 Run the script with:
 To Start: >
