@@ -115,7 +115,7 @@ Author
 Also see the `AUTHORS` file.
 
 Development of VimRpc happens at github:
-https://github.com/klen/python-mode
+https://github.com/da-emzy/VimRpc
 
 Please make a pull request to `dev` branch and add yourself to the `AUTHORS` file.
 
