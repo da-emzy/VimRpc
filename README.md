@@ -110,7 +110,7 @@ at https://github.com/da-emzy/VimRpc/issues
 Contributing
 ============
 Author
-* Da Emzy (emzyoflyf@yahoo.com)
+* Da Emzy
 
 Also see the `AUTHORS` file.
 
